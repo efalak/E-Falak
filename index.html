@@ -1077,7 +1077,7 @@ opacity:0.2;
 }
 }
 
-  input,
+input,
 input[type="number"],
 input[type="text"]{
 background:#fff !important;
@@ -1091,6 +1091,7 @@ input::placeholder{
 color:#555 !important;
 -webkit-text-fill-color:#555 !important;
 }
+
 </style>
 </head>
 <body>
@@ -1932,29 +1933,210 @@ Oleh karena itu, metode hisab digunakan untuk memprediksi kemungkinan terlihatny
 }
 
 // ================= KIBLAT =================
-function showKiblat(){
-content.innerHTML=`
+function showKiblat() {
+content.innerHTML = `
 <div class="main-box">
+
 <h2>🧭 Arah Kiblat</h2>
 
+<div class="box">
+
+<h3>📌 Pengertian Arah Kiblat</h3>
+
 <p>
-Arah kiblat adalah arah menuju Ka'bah di Makkah.
+Arah kiblat adalah arah yang dituju umat Islam ketika melaksanakan ibadah salat, yaitu menghadap Ka'bah yang berada di Masjidil Haram, Kota Makkah. Dalam ilmu falak, arah kiblat dipahami sebagai arah terdekat melalui lingkaran besar bumi dari suatu tempat menuju Ka'bah.
 </p>
 
-<h3>Metode Penentuan</h3>
+<p>
+Penentuan arah kiblat memiliki peranan penting karena menjadi salah satu syarat sah salat bagi umat Islam. Oleh karena itu, arah kiblat harus ditentukan secara tepat agar pelaksanaan ibadah sesuai dengan ketentuan syariat.
+</p>
+
+<p>
+Dalam praktiknya, penentuan arah kiblat dapat dilakukan menggunakan metode sederhana maupun perhitungan astronomi berdasarkan data lintang dan bujur suatu wilayah.
+</p>
+
+<p>
+Ilmu falak berperan dalam membantu menentukan arah kiblat secara lebih akurat melalui perhitungan sudut azimut kiblat, posisi matahari, dan koordinat geografis bumi.
+</p>
+
+<p>
+Dengan perkembangan teknologi modern, penentuan arah kiblat kini juga dapat dilakukan menggunakan kompas, GPS, aplikasi digital, dan software astronomi.
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>📖 Dasar Hukum Arah Kiblat</h3>
+
+<p>
+Dasar hukum kewajiban menghadap kiblat dijelaskan dalam Al-Qur’an dan hadis Rasulullah SAW.
+</p>
+
+<h3>📖 Al-Qur’an</h3>
+
+<p>
+Allah SWT berfirman dalam Surah Al-Baqarah ayat 144:
+</p>
+
+<div class="rumus">
+قَدْ نَرَىٰ تَقَلُّبَ وَجْهِكَ فِي السَّمَاءِ ۖ فَلَنُوَلِّيَنَّكَ قِبْلَةً تَرْضَاهَا ۚ فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ
+</div>
+
+<p>
+Artinya:
+<br>
+“Sungguh Kami sering melihat wajahmu menengadah ke langit, maka sungguh Kami akan memalingkan engkau ke kiblat yang engkau sukai. Maka hadapkanlah wajahmu ke arah Masjidil Haram.”
+<br>
+(QS. Al-Baqarah: 144)
+</p>
+
+<p>
+Ayat tersebut menjelaskan bahwa umat Islam diperintahkan untuk menghadap Masjidil Haram ketika melaksanakan salat.
+</p>
+
+<h3>📖 Hadis Rasulullah SAW</h3>
+
+<p>
+Rasulullah SAW bersabda:
+</p>
+
+<div class="rumus">
+إِذَا قُمْتَ إِلَى الصَّلَاةِ فَأَسْبِغِ الْوُضُوءَ ثُمَّ اسْتَقْبِلِ الْقِبْلَةَ فَكَبِّرْ
+</div>
+
+<p>
+Artinya:
+<br>
+“Apabila engkau hendak melaksanakan salat, maka sempurnakanlah wudu, kemudian menghadaplah ke kiblat lalu bertakbirlah.”
+<br>
+(HR. Bukhari dan Muslim)
+</p>
+
+<p>
+Hadis tersebut menunjukkan bahwa menghadap kiblat merupakan bagian penting dalam pelaksanaan salat.
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>🧭 Metode Menentukan Arah Kiblat</h3>
+
+<p>
+Penentuan arah kiblat merupakan proses menentukan arah Ka'bah di Makkah dari suatu tempat di permukaan bumi.
+Dalam ilmu falak, arah kiblat dapat ditentukan menggunakan beberapa metode, mulai dari cara sederhana hingga perhitungan astronomi modern.
+</p>
+
 <ul>
-<li>Kompas</li>
-<li>Bayangan Matahari</li>
-<li>Trigonometri Bola</li>
-<li>Aplikasi astronomi</li>
+
+<li>
+<h3>📌 1. Metode Kompas</h3>
+
+<p>
+Metode kompas merupakan cara paling sederhana untuk menentukan arah kiblat. Kompas digunakan untuk mengetahui arah mata angin, khususnya arah utara dan selatan, kemudian disesuaikan dengan sudut azimut kiblat suatu daerah.
+</p>
+
+<p><strong>Langkah penggunaan:</strong></p>
+
+<ul>
+<li>Menentukan arah utara menggunakan kompas</li>
+<li>Mengetahui sudut azimut kiblat daerah setempat</li>
+<li>Mengarahkan posisi kiblat sesuai sudut yang dihitung</li>
 </ul>
 
-<h3>Rumus Dasar</h3>
-<div class="rumus">
-Tan Q = sin(ΔB) :
-(cos L x tan MK - sin L x cos ΔB)
+<p>
+✨ Metode ini praktis digunakan, tetapi tingkat akurasinya dapat dipengaruhi medan magnet di sekitar lokasi.
+</p>
+</li>
+
+<li>
+<h3>☀️ 2. Metode Bayangan Matahari (Rashdul Kiblat)</h3>
+
+<p>
+Metode rashdul kiblat dilakukan dengan memanfaatkan posisi matahari ketika berada tepat di atas Ka'bah. Pada waktu tertentu, bayangan benda tegak akan menunjukkan arah kiblat secara langsung.
+</p>
+
+<p><strong>Cara pelaksanaan:</strong></p>
+
+<ul>
+<li>Menyiapkan benda tegak lurus</li>
+<li>Mengamati arah bayangan saat waktu rashdul kiblat</li>
+<li>Arah bayangan menunjukkan arah kiblat</li>
+</ul>
+
+<p>
+✨ Metode ini memiliki tingkat akurasi tinggi karena menggunakan posisi matahari secara langsung.
+</p>
+</li>
+
+<li>
+<h3>🌍 3. Metode Koordinat dan Azimut Kiblat</h3>
+
+<p>
+Metode ini menggunakan data lintang dan bujur suatu tempat untuk menghitung arah kiblat menuju Ka'bah. Dalam ilmu falak, arah kiblat dihitung dalam bentuk sudut azimut kiblat.
+</p>
+
+<p><strong>Data yang diperlukan:</strong></p>
+
+<ul>
+<li>Lintang tempat</li>
+<li>Bujur tempat</li>
+<li>Koordinat Ka'bah</li>
+</ul>
+
+<p><strong>Hasil perhitungan:</strong></p>
+
+<ul>
+<li>Sudut arah kiblat dari arah utara atau barat</li>
+</ul>
+
+<p>
+✨ Metode ini lebih akurat karena menggunakan perhitungan astronomi dan matematika.
+</p>
+</li>
+
+<li>
+<h3>💻 4. Metode Digital dan Teknologi Modern</h3>
+
+<p>
+Perkembangan teknologi mempermudah penentuan arah kiblat menggunakan perangkat digital.
+</p>
+
+<p><strong>Alat yang digunakan:</strong></p>
+
+<ul>
+<li>GPS</li>
+<li>Google Maps</li>
+<li>Aplikasi arah kiblat</li>
+<li>Software astronomi</li>
+</ul>
+
+<p>
+✨ Metode digital lebih praktis dan cepat karena sistem dapat menghitung arah kiblat secara otomatis berdasarkan lokasi pengguna.
+</p>
+</li>
+
+</ul>
+
 </div>
-</div>`;
+
+<div class="box">
+
+<h3>✨ Kesimpulan</h3>
+
+<p>
+Metode penentuan arah kiblat dapat dilakukan menggunakan kompas, bayangan matahari, perhitungan azimut kiblat, maupun teknologi digital.
+</p>
+
+<p>
+Dalam ilmu falak, metode yang menggunakan data astronomi dan koordinat geografis memiliki tingkat akurasi yang lebih tinggi karena dihitung berdasarkan posisi bumi dan Ka'bah secara ilmiah.
+</p>
+
+</div>
+
+</div>
+`;
 }
 
 // ================= KALKULATOR SHOLAT =================
@@ -3275,4 +3457,3 @@ ${h13.innerText}
 
 </body>
 </html>
-```
