@@ -1,0 +1,3264 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Falak Ultimate</title>
+
+<style>
+
+:root{
+--bg:#020817;
+--bg2:#07111f;
+--card:rgba(255,255,255,.07);
+--card2:rgba(255,255,255,.12);
+--line:rgba(255,255,255,.12);
+--text:#e2e8f0;
+--primary:#38bdf8;
+--cyan:#67e8f9;
+--blue:#0ea5e9;
+--shadow:0 10px 40px rgba(0,0,0,.55);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+html,body{
+width:100%;
+height:100%;
+font-family:'Segoe UI',sans-serif;
+overflow:hidden;
+background:
+radial-gradient(circle at top,#10233e 0%,#040b14 45%,#020817 100%);
+color:var(--text);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#08111f;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(#0ea5e9,#38bdf8);
+border-radius:20px;
+}
+
+/* WRAPPER */
+#wrapper{
+width:100%;
+height:100%;
+display:flex;
+position:relative;
+overflow:hidden;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:300px;
+height:100%;
+padding:24px;
+overflow-y:auto;
+background:
+linear-gradient(
+180deg,
+rgba(8,15,28,.98),
+rgba(2,8,23,.96)
+);
+border-right:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+box-shadow:0 0 40px rgba(0,0,0,.7);
+position:relative;
+z-index:10;
+animation:slideSidebar .8s ease;
+}
+
+@keyframes slideSidebar{
+from{
+transform:translateX(-80px);
+opacity:0;
+}
+to{
+transform:translateX(0);
+opacity:1;
+}
+}
+
+.sidebar::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+180deg,
+rgba(56,189,248,.08),
+transparent
+);
+pointer-events:none;
+}
+
+.logo{
+text-align:center;
+margin-bottom:30px;
+}
+
+.logo h1{
+font-size:34px;
+font-weight:800;
+letter-spacing:2px;
+background:linear-gradient(90deg,#7dd3fc,#38bdf8,#67e8f9);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 25px rgba(56,189,248,.6);
+animation:glow 3s infinite alternate;
+}
+
+.logo p{
+font-size:13px;
+opacity:.7;
+margin-top:8px;
+letter-spacing:1px;
+}
+
+@keyframes glow{
+from{
+filter:drop-shadow(0 0 6px rgba(56,189,248,.3));
+}
+to{
+filter:drop-shadow(0 0 20px rgba(56,189,248,.8));
+}
+}
+
+/* MENU CARD */
+.card{
+background:var(--card);
+border:1px solid rgba(255,255,255,.08);
+padding:16px 18px;
+border-radius:18px;
+margin-bottom:14px;
+cursor:pointer;
+transition:.35s;
+backdrop-filter:blur(12px);
+position:relative;
+overflow:hidden;
+font-weight:600;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+.card::before{
+content:'';
+position:absolute;
+top:0;
+left:-120%;
+width:100%;
+height:100%;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.12),
+transparent
+);
+transition:.7s;
+}
+
+.card:hover::before{
+left:120%;
+}
+
+.card:hover{
+transform:translateY(-5px) scale(1.02);
+background:var(--card2);
+border-color:rgba(56,189,248,.4);
+box-shadow:
+0 0 25px rgba(56,189,248,.18),
+0 10px 30px rgba(0,0,0,.35);
+}
+
+/* CONTENT */
+.content{
+flex:1;
+height:100%;
+overflow-y:auto;
+padding:35px;
+position:relative;
+}
+
+/* AURORA */
+.content::before{
+content:'';
+position:fixed;
+width:600px;
+height:600px;
+border-radius:50%;
+background:
+radial-gradient(circle,
+rgba(14,165,233,.18),
+transparent 70%);
+top:-200px;
+right:-150px;
+filter:blur(40px);
+animation:floatAura 10s ease-in-out infinite;
+pointer-events:none;
+}
+
+.content::after{
+content:'';
+position:fixed;
+width:450px;
+height:450px;
+border-radius:50%;
+background:
+radial-gradient(circle,
+rgba(103,232,249,.12),
+transparent 70%);
+bottom:-120px;
+left:-120px;
+filter:blur(35px);
+animation:floatAura2 12s ease-in-out infinite;
+pointer-events:none;
+}
+
+@keyframes floatAura{
+0%{transform:translateY(0);}
+50%{transform:translateY(30px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes floatAura2{
+0%{transform:translateX(0);}
+50%{transform:translateX(30px);}
+100%{transform:translateX(0);}
+}
+
+/* STARS */
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+z-index:0;
+}
+
+@keyframes twinkle{
+from{
+opacity:.2;
+transform:scale(.8);
+}
+to{
+opacity:1;
+transform:scale(1.6);
+}
+}
+
+/* PLANET */
+.planet{
+position:absolute;
+border-radius:50%;
+opacity:.16;
+filter:blur(.5px);
+animation:planetFloat 8s ease-in-out infinite;
+}
+
+@keyframes planetFloat{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(15px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+.p1{
+width:220px;
+height:220px;
+background:
+radial-gradient(circle at 30% 30%,#7dd3fc,#0369a1);
+right:70px;
+top:40px;
+box-shadow:0 0 50px rgba(56,189,248,.3);
+}
+
+.p2{
+width:130px;
+height:130px;
+background:
+radial-gradient(circle at 30% 30%,#fb923c,#7c2d12);
+bottom:50px;
+right:240px;
+box-shadow:0 0 40px rgba(249,115,22,.3);
+}
+
+/* MAIN BOX */
+.main-box{
+position:relative;
+z-index:2;
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.05)
+);
+border:1px solid rgba(255,255,255,.08);
+padding:35px;
+border-radius:28px;
+backdrop-filter:blur(18px);
+box-shadow:
+0 10px 50px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.08);
+line-height:1.9;
+animation:fadeUp .7s ease;
+overflow:hidden;
+}
+
+.main-box::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+120deg,
+rgba(255,255,255,.03),
+transparent 40%
+);
+pointer-events:none;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* TITLE */
+h2{
+font-size:34px;
+margin-bottom:18px;
+font-weight:800;
+color:#7dd3fc;
+text-shadow:0 0 12px rgba(56,189,248,.35);
+}
+
+h3{
+margin-top:28px;
+margin-bottom:14px;
+font-size:24px;
+color:#a5f3fc;
+}
+
+p{
+margin-bottom:16px;
+font-size:16px;
+color:#dbeafe;
+}
+
+ul{
+padding-left:22px;
+}
+
+li{
+margin-bottom:10px;
+}
+
+/* BOX */
+.box{
+margin-top:16px;
+padding:22px;
+border-radius:22px;
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.06),
+rgba(255,255,255,.04)
+);
+border:1px solid rgba(255,255,255,.07);
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+transition:.3s;
+}
+
+.box:hover{
+transform:translateY(-2px);
+border-color:rgba(56,189,248,.18);
+}
+
+/* RUMUS */
+.rumus{
+background:
+linear-gradient(
+180deg,
+rgba(8,47,73,.6),
+rgba(15,23,42,.6)
+);
+padding:18px;
+border-radius:18px;
+margin-top:12px;
+font-family:Consolas,monospace;
+line-height:2;
+overflow:auto;
+border:1px solid rgba(56,189,248,.18);
+box-shadow:
+inset 0 0 20px rgba(56,189,248,.08),
+0 5px 18px rgba(0,0,0,.2);
+}
+
+/* INPUT */
+input{
+width:78px;
+padding:11px;
+margin:4px;
+border:none;
+outline:none;
+border-radius:12px;
+text-align:center;
+background:
+rgba(255,255,255,.1);
+color:white;
+font-weight:bold;
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(8px);
+transition:.25s;
+}
+
+input:focus{
+border-color:#38bdf8;
+box-shadow:
+0 0 0 3px rgba(56,189,248,.2),
+0 0 15px rgba(56,189,248,.2);
+transform:scale(1.03);
+}
+
+/* BUTTON */
+button{
+padding:13px 20px;
+border:none;
+border-radius:14px;
+background:
+linear-gradient(
+90deg,
+#0284c7,
+#38bdf8
+);
+color:white;
+cursor:pointer;
+margin-top:12px;
+font-weight:700;
+letter-spacing:.5px;
+transition:.3s;
+box-shadow:
+0 8px 20px rgba(14,165,233,.25);
+position:relative;
+overflow:hidden;
+}
+
+button::before{
+content:'';
+position:absolute;
+top:0;
+left:-120%;
+width:100%;
+height:100%;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.28),
+transparent
+);
+transition:.7s;
+}
+
+button:hover::before{
+left:120%;
+}
+
+button:hover{
+transform:translateY(-3px) scale(1.03);
+box-shadow:
+0 0 25px rgba(56,189,248,.45),
+0 10px 30px rgba(0,0,0,.3);
+}
+
+/* TABLE */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+overflow:hidden;
+border-radius:20px;
+}
+
+th{
+background:
+linear-gradient(
+90deg,
+rgba(14,165,233,.35),
+rgba(56,189,248,.18)
+);
+padding:14px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+td{
+padding:12px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.03);
+}
+
+tr:hover td{
+background:rgba(255,255,255,.06);
+}
+
+/* HR */
+hr{
+margin:35px 0;
+border:none;
+height:1px;
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.25),
+transparent
+);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+#wrapper{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+height:auto;
+max-height:240px;
+border-right:none;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.content{
+padding:18px;
+}
+
+.main-box{
+padding:24px;
+border-radius:22px;
+}
+
+h2{
+font-size:28px;
+}
+
+h3{
+font-size:21px;
+}
+
+input{
+width:70px;
+}
+
+}
+
+/* ================= SOLAR SYSTEM ================= */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body,html{
+width:100%;
+height:100%;
+font-family:Segoe UI,sans-serif;
+overflow:hidden;
+background:#040b14;
+color:white;
+}
+
+#wrapper{
+width:100%;
+height:100%;
+display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:280px;
+background:linear-gradient(180deg,#0b1622,#040b14);
+padding:20px;
+overflow-y:auto;
+box-shadow:0 0 30px rgba(0,0,0,.8);
+z-index:10;
+}
+
+.sidebar h1{
+text-align:center;
+margin-bottom:25px;
+font-size:28px;
+color:#6cf;
+text-shadow:0 0 12px #09f;
+}
+
+.card{
+background:rgba(255,255,255,.07);
+padding:15px;
+border-radius:14px;
+margin-bottom:12px;
+cursor:pointer;
+transition:.3s;
+backdrop-filter:blur(6px);
+}
+
+.card:hover{
+background:rgba(255,255,255,.18);
+transform:translateY(-4px);
+}
+
+/* CONTENT */
+.content{
+flex:1;
+overflow:hidden;
+padding:0;
+position:relative;
+background:
+radial-gradient(circle at center,
+#10172b 0%,
+#050816 70%,
+black 100%);
+}
+
+/* STARS */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:.2;}
+to{opacity:1;}
+}
+
+/* BOX */
+.main-box{
+background:rgba(255,255,255,.07);
+padding:25px;
+border-radius:20px;
+backdrop-filter:blur(8px);
+box-shadow:0 0 30px rgba(0,0,0,.6);
+line-height:1.8;
+position:relative;
+z-index:2;
+margin:30px;
+overflow-y:auto;
+max-height:90vh;
+}
+
+h2{
+margin-bottom:15px;
+color:#7dd3fc;
+}
+
+h3{
+margin-top:25px;
+margin-bottom:10px;
+color:#a5f3fc;
+}
+
+ul{
+padding-left:20px;
+}
+
+input{
+width:60px;
+padding:5px;
+margin:2px;
+border:none;
+border-radius:7px;
+text-align:center;
+background:#fff;
+}
+
+button{
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#0af,#08f);
+color:white;
+cursor:pointer;
+margin-top:10px;
+font-weight:bold;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #0af;
+}
+
+.box{
+margin-top:10px;
+padding:15px;
+border-radius:14px;
+background:rgba(255,255,255,.08);
+}
+
+.rumus{
+background:rgba(255,255,255,.05);
+padding:10px;
+border-radius:10px;
+margin-top:8px;
+font-family:monospace;
+line-height:1.8;
+}
+
+/* BACKGROUND PLANET */
+.bg-planet{
+position:absolute;
+border-radius:50%;
+opacity:.15;
+filter:blur(.5px);
+}
+
+.p1{
+width:200px;
+height:200px;
+background:radial-gradient(circle,#38bdf8,#0369a1);
+right:50px;
+top:50px;
+}
+
+.p2{
+width:120px;
+height:120px;
+background:radial-gradient(circle,#f97316,#7c2d12);
+bottom:50px;
+right:200px;
+}
+
+/* ================= SOLAR SYSTEM ================= */
+
+.title{
+position:absolute;
+top:20px;
+width:100%;
+text-align:center;
+z-index:100;
+}
+
+.title h1{
+color:#ffd54f;
+margin-bottom:8px;
+font-size:34px;
+text-shadow:0 0 15px rgba(255,213,79,.5);
+}
+
+.title p{
+color:#ddd;
+font-size:15px;
+}
+
+/* AREA SOLAR */
+.solar-system{
+width:100%;
+height:100%;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* SUN */
+.sun{
+width:90px;
+height:90px;
+
+background:
+radial-gradient(circle,
+#fff59d,
+#ffca28,
+#ff8f00);
+
+border-radius:50%;
+position:absolute;
+
+box-shadow:
+0 0 30px #ffca28,
+0 0 60px #ff9800,
+0 0 120px rgba(255,152,0,0.5);
+
+z-index:50;
+
+animation:pulse 4s infinite;
+}
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+}
+
+/* ORBIT */
+.orbit{
+position:absolute;
+border:1px solid rgba(255,255,255,0.08);
+border-radius:50%;
+animation:rotate linear infinite;
+}
+
+@keyframes rotate{
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+}
+
+/* PLANET */
+.planet{
+position:absolute;
+top:50%;
+left:100%;
+transform:translate(-50%,-50%);
+border-radius:50%;
+opacity:1;
+filter:none;
+}
+
+/* LABEL */
+.label{
+position:absolute;
+top:-18px;
+left:-15px;
+font-size:11px;
+white-space:nowrap;
+color:white;
+}
+
+/* MERKURIUS */
+.orbit1{
+width:140px;
+height:140px;
+animation-duration:8s;
+}
+
+.mercury{
+width:8px;
+height:8px;
+background:#bdbdbd;
+}
+
+/* VENUS */
+.orbit2{
+width:200px;
+height:200px;
+animation-duration:14s;
+}
+
+.venus{
+width:14px;
+height:14px;
+background:#d4a373;
+}
+
+/* BUMI */
+.orbit3{
+width:280px;
+height:280px;
+animation-duration:20s;
+}
+
+.earth{
+width:16px;
+height:16px;
+
+background:
+linear-gradient(
+to bottom,
+#64b5f6,
+#1976d2);
+
+position:absolute;
+
+top:50%;
+left:100%;
+
+transform:
+translate(-50%,-50%);
+
+border-radius:50%;
+
+box-shadow:
+0 0 12px #64b5f6;
+}
+
+/* BULAN */
+.moon-orbit{
+width:42px;
+height:42px;
+
+position:absolute;
+
+top:-100%;
+left:-100%;
+
+transform:
+translate(-50%,-50%);
+
+border:
+1px solid rgba(255,255,255,0.18);
+
+border-radius:50%;
+
+animation:
+rotate 4s linear infinite;
+}
+
+.moon{
+width:6px;
+height:6px;
+
+background:white;
+
+border-radius:50%;
+
+position:absolute;
+
+top:50%;
+left:100%;
+
+transform:
+translate(-50%,-50%);
+
+box-shadow:
+0 0 8px white;
+}
+
+/* MARS */
+.orbit4{
+width:360px;
+height:360px;
+animation-duration:30s;
+}
+
+.mars{
+width:12px;
+height:12px;
+background:#c1440e;
+}
+
+/* JUPITER */
+.orbit5{
+width:500px;
+height:500px;
+animation-duration:45s;
+}
+
+.jupiter{
+width:32px;
+height:32px;
+background:#d9a066;
+}
+
+/* SATURN */
+.orbit6{
+width:650px;
+height:650px;
+animation-duration:60s;
+}
+
+.saturn{
+width:26px;
+height:26px;
+background:#e0c097;
+position:relative;
+}
+
+.saturn::after{
+content:"";
+width:46px;
+height:10px;
+
+border:
+2px solid rgba(255,255,255,0.45);
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:
+translate(-50%,-50%);
+
+border-radius:50%;
+}
+
+/* URANUS */
+.orbit7{
+width:820px;
+height:820px;
+animation-duration:80s;
+}
+
+.uranus{
+width:22px;
+height:22px;
+background:#8ecae6;
+}
+
+/* NEPTUNUS */
+.orbit8{
+width:980px;
+height:980px;
+animation-duration:100s;
+}
+
+.neptune{
+width:20px;
+height:20px;
+background:#4361ee;
+}
+
+/* STAR SOLAR */
+.solar-star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:0.8;
+animation:blink 2s infinite;
+}
+
+@keyframes blink{
+0%{
+opacity:0.2;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:0.2;
+}
+}
+
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<div class="logo">
+<h1>🌌 E-FALAK</h1>
+<p>Interactive Astronomy & Falak Learning</p>
+</div>
+
+<div class="card" onclick="showMateri()">📖 Pengertian Ilmu Falak</div>
+
+<div class="card" onclick="showHisab()">🌙 Hisab & Rukyat</div>
+
+<div class="card" onclick="showKiblat()">🧭 Arah Kiblat</div>
+
+<div class="card" onclick="showSholat()">🕌 Kalkulator Waktu Sholat</div>
+
+<div class="card" onclick="showHijriah()">📅 Hijriah ke Masehi</div>
+
+<div class="card" onclick="showMasehiHijri()">🗓️ Masehi ke Hijriah</div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="content" id="content">
+
+<!-- TITLE -->
+<div class="title">
+
+  <h1>Solar System Simulation</h1>
+
+  <p>
+    Visualisasi Tata Surya untuk Teknologi Hisab Rukyat - E-FAL
+  </p>
+
+</div>
+
+<!-- BINTANG -->
+<div class="star solar-star" style="top:10%;left:20%;"></div>
+<div class="star solar-star" style="top:30%;left:80%;"></div>
+<div class="star solar-star" style="top:70%;left:15%;"></div>
+<div class="star solar-star" style="top:85%;left:60%;"></div>
+<div class="star solar-star" style="top:50%;left:40%;"></div>
+<div class="star solar-star" style="top:25%;left:55%;"></div>
+<div class="star solar-star" style="top:75%;left:85%;"></div>
+
+<!-- SOLAR SYSTEM -->
+<div class="solar-system">
+
+  <!-- SUN -->
+  <div class="sun"></div>
+
+  <!-- MERKURIUS -->
+  <div class="orbit orbit1">
+
+    <div class="planet mercury">
+
+      <div class="label">
+        Merkurius
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- VENUS -->
+  <div class="orbit orbit2">
+
+    <div class="planet venus">
+
+      <div class="label">
+        Venus
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BUMI -->
+  <div class="orbit orbit3">
+
+    <div class="earth">
+
+      <div class="label">
+        Bumi
+      </div>
+
+      <!-- BULAN -->
+      <div class="moon-orbit">
+
+        <div class="moon"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MARS -->
+  <div class="orbit orbit4">
+
+    <div class="planet mars">
+
+      <div class="label">
+        Mars
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JUPITER -->
+  <div class="orbit orbit5">
+
+    <div class="planet jupiter">
+
+      <div class="label">
+        Jupiter
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SATURNUS -->
+  <div class="orbit orbit6">
+
+    <div class="planet saturn">
+
+      <div class="label">
+        Saturnus
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- URANUS -->
+  <div class="orbit orbit7">
+
+    <div class="planet uranus">
+
+      <div class="label">
+        Uranus
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NEPTUNUS -->
+  <div class="orbit orbit8">
+
+    <div class="planet neptune">
+
+      <div class="label">
+        Neptunus
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ================= BINTANG ================= */
+
+for(let i=0;i<140;i++){
+
+let s=document.createElement('div');
+
+s.className='star';
+
+s.style.left=Math.random()*100+'%';
+
+s.style.top=Math.random()*100+'%';
+
+s.style.animationDelay=Math.random()*5+'s';
+
+s.style.animationDuration=(Math.random()*3+2)+'s';
+
+document.body.appendChild(s);
+
+}
+
+/* ================= EFFECT SUARA KLIK HALUS ================= */
+
+document.addEventListener("click",e=>{
+
+if(
+e.target.classList.contains("card") ||
+e.target.tagName==="BUTTON"
+){
+
+e.target.animate([
+{transform:'scale(1)'},
+{transform:'scale(.96)'},
+{transform:'scale(1)'}
+],{
+duration:180
+});
+
+}
+
+});
+
+// ================= MATERI =================
+function showMateri(){
+content.innerHTML=`
+<div class="main-box">
+
+<h2>📖 Pengertian Ilmu Falak</h2>
+
+<p>
+Ilmu falak merupakan cabang ilmu pengetahuan yang mempelajari posisi, gerak, lintasan, dan peredaran benda-benda langit seperti matahari, bulan, bumi, dan bintang. Dalam konteks Islam, ilmu falak digunakan untuk menentukan berbagai keperluan ibadah yang berkaitan dengan waktu dan arah, seperti penentuan waktu salat, arah kiblat, awal bulan hijriah, serta peristiwa gerhana matahari dan bulan. Oleh karena itu, ilmu falak memiliki hubungan yang sangat erat dengan pelaksanaan ibadah umat Islam dalam kehidupan sehari-hari.
+</p>
+
+<p>
+Secara etimologis, kata “falak” berasal dari bahasa Arab “الفلك” yang berarti orbit, lintasan, atau garis edar benda langit. Dalam Al-Qur’an, istilah falak digunakan untuk menggambarkan peredaran matahari dan bulan yang bergerak pada garis edarnya masing-masing. Dari pengertian tersebut, ilmu falak dapat dipahami sebagai ilmu yang mempelajari keteraturan pergerakan benda langit berdasarkan pengamatan dan perhitungan astronomi.
+</p>
+
+<p>
+Ilmu falak juga disebut astronomi Islam.
+</p>
+
+<h3>📖 Allah SWT berfirman:</h3>
+
+<div class="rumus"
+style="
+font-size:24px;
+text-align:center;
+line-height:2;
+font-family:'Traditional Arabic', serif;
+">
+وَهُوَ ٱلَّذِى خَلَقَ ٱلَّيْلَ وَٱلنَّهَارَ وَٱلشَّمْسَ وَٱلْقَمَرَ كُلٌّ فِى فَلَكٍ يَسْبَحُونَ
+</div>
+
+<br>
+
+<p>
+Artinya:
+“Dan Dialah yang telah menciptakan malam dan siang, matahari dan bulan. Masing-masing beredar pada garis edarnya.” (Q.S. Al-Anbiya: 33)
+</p>
+
+<p>
+Ayat tersebut menjelaskan bahwa matahari dan bulan bergerak secara teratur pada garis edarnya masing-masing. Keteraturan peredaran benda langit inilah yang kemudian dipelajari dalam ilmu falak melalui pengamatan dan perhitungan astronomi.
+</p>
+
+<p>
+Dalam perkembangannya, ilmu falak tidak hanya berkaitan dengan pengamatan langit, tetapi juga memadukan ilmu astronomi, matematika, dan geografi. Oleh karena itu, ilmu falak menjadi ilmu yang digunakan untuk memahami fenomena langit secara ilmiah dan sistematis.
+</p>
+
+<hr style="
+margin:30px 0;
+border:none;
+height:1px;
+background:rgba(255,255,255,.2);
+">
+
+<h2>📜 Ruang Lingkup Ilmu Falak</h2>
+
+<p>
+Ruang lingkup ilmu falak mencakup pembahasan mengenai posisi, pergerakan, dan peredaran benda-benda langit yang berkaitan dengan kepentingan manusia, khususnya dalam pelaksanaan ibadah umat Islam. Ilmu falak tidak hanya mempelajari teori astronomi, tetapi juga membahas penerapan perhitungan dan pengamatan langit dalam menentukan waktu, arah, dan penanggalan Islam.
+</p>
+
+<h3>📌 Ruang Lingkup Ilmu Falak</h3>
+
+<div class="box">
+
+<p>
+☀️ <b>Penentuan Waktu Sholat.</b>
+Ilmu falak digunakan untuk menentukan masuknya waktu salat berdasarkan posisi matahari. Perhitungan dilakukan melalui pengamatan tinggi matahari, sudut matahari, dan perubahan cahaya di langit.
+</p>
+
+<br>
+
+<p>
+🧭 <b>Penentuan Arah Kiblat.</b>
+Ilmu falak membahas cara menentukan arah Ka'bah dari berbagai wilayah di permukaan bumi menggunakan perhitungan astronomi dan geografi.
+</p>
+
+<br>
+
+<p>
+🌙 <b>Penentuan Awal Bulan Hijriah.</b>
+Ilmu falak digunakan untuk menentukan awal bulan kamariah melalui metode hisab dan rukyat, khususnya dalam penetapan Ramadan, Syawal, dan Zulhijah.
+</p>
+
+<br>
+
+<p>
+🌗 <b>Hisab dan Rukyat.</b>
+Hisab merupakan metode perhitungan astronomi, sedangkan rukyat adalah pengamatan hilal secara langsung. Keduanya menjadi bagian penting dalam ilmu falak.
+</p>
+
+<br>
+
+<p>
+🌍 <b>Peredaran Benda Langit.</b>
+Ilmu falak mempelajari peredaran bumi, bulan, dan matahari, termasuk rotasi, revolusi, fase bulan, dan gerak semu matahari.
+</p>
+
+<br>
+
+<p>
+🌑 <b>Gerhana Matahari dan Bulan.</b>
+Ilmu falak membahas proses terjadinya gerhana serta perhitungan waktu dan lokasi terjadinya gerhana matahari maupun gerhana bulan.
+</p>
+
+<br>
+
+<p>
+💻 <b>Teknologi Astronomi dan Digital.</b>
+Perkembangan ilmu falak modern memanfaatkan teknologi seperti teleskop, aplikasi digital, software astronomi, dan sistem komputerisasi untuk membantu proses pengamatan dan perhitungan astronomi secara lebih akurat.
+</p>
+
+<hr style="
+margin:30px 0;
+border:none;
+height:1px;
+background:rgba(255,255,255,.2);
+">
+
+<h2>📜 Sejarah Perkembangan Ilmu Falak</h2>
+
+<div class="box">
+
+<h3>1. 🏺 Masa Peradaban Kuno</h3>
+
+<p>
+Perkembangan ilmu falak bermula dari pengamatan manusia terhadap benda-benda langit, seperti matahari, bulan, dan bintang. Peradaban kuno seperti Babilonia, Mesir, Yunani, dan India mulai mempelajari pergerakan benda langit untuk menentukan waktu, musim, arah, serta kebutuhan pertanian dan pelayaran. Pada masa ini, pengamatan astronomi masih dilakukan secara sederhana berdasarkan fenomena alam yang terlihat langsung di langit.
+</p>
+
+<p>
+📌 <b>Fokus utama:</b><br>
+Penentuan musim, Penanggalan, Navigasi dan pelayaran.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>2. ☪️ Masa Perkembangan Islam</h3>
+
+<p>
+Ilmu falak berkembang pesat pada masa kejayaan Islam karena memiliki hubungan erat dengan pelaksanaan ibadah umat Islam. Kebutuhan untuk menentukan waktu salat, arah kiblat, awal bulan hijriah, dan jadwal ibadah haji mendorong para ilmuwan Muslim mengembangkan metode astronomi yang lebih sistematis dan akurat.
+</p>
+
+<p>
+📌 <b>Ilmu falak digunakan untuk:</b><br>
+Penentuan waktu salat, Penentuan arah kiblat, Penentuan awal Ramadan dan Syawal, Pengamatan hilal.
+</p>
+
+<p>
+✨ Pada masa ini, observatorium dan alat pengamatan astronomi mulai dikembangkan di berbagai wilayah Islam.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>3. 👨‍🔬 Tokoh-Tokoh Ilmu Falak Islam</h3>
+
+<p>
+Beberapa ilmuwan Muslim memberikan kontribusi besar dalam perkembangan ilmu falak dan astronomi. Al-Khawarizmi mengembangkan tabel astronomi dan metode perhitungan matematika, Al-Biruni melakukan penelitian tentang bumi dan posisi benda langit, sedangkan Al-Battani dikenal melalui pengamatan astronomi yang akurat mengenai pergerakan matahari dan bulan.
+</p>
+
+<p>
+📌 <b>Tokoh penting:</b><br>
+Al-Khawarizmi, Al-Biruni, Al-Battani, Ibnu Yunus.
+</p>
+
+<p>
+✨ Karya-karya mereka menjadi dasar perkembangan ilmu astronomi di dunia Islam maupun Eropa.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>4. 💻 Perkembangan Ilmu Falak Modern</h3>
+
+<p>
+Pada era modern, ilmu falak berkembang dengan memanfaatkan teknologi digital dan sistem komputerisasi. Perhitungan yang sebelumnya dilakukan secara manual kini dapat dilakukan menggunakan aplikasi, software astronomi, teleskop modern, dan sistem satelit. Teknologi tersebut membantu menghasilkan data astronomi yang lebih cepat dan akurat.
+</p>
+
+<p>
+📌 <b>Teknologi modern:</b><br>
+Teleskop astronomi, Software falak, Aplikasi jadwal salat, Sistem satelit dan GPS.
+</p>
+
+<p>
+✨ Perkembangan teknologi menjadikan ilmu falak lebih mudah dipelajari dan diterapkan dalam kehidupan sehari-hari, khususnya dalam penentuan waktu ibadah dan kalender Islam.
+</p>
+</div>
+
+<hr style="
+margin:30px 0;
+border:none;
+height:1px;
+background:rgba(255,255,255,.2);
+">
+
+<h2>🌌 Benda-Benda Langit dalam Ilmu Falak</h2>
+
+<div class="box">
+
+<p>
+Benda-benda langit merupakan objek utama yang dipelajari dalam ilmu falak. Pergerakan dan posisi benda langit digunakan sebagai dasar dalam penentuan waktu salat, arah kiblat, kalender hijriah, hisab, rukyat, serta berbagai fenomena astronomi lainnya. Dalam ilmu falak, benda langit yang paling banyak dikaji adalah matahari, bulan, bumi, bintang, dan planet.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>1️⃣ ☀️ Matahari</h3>
+
+<p>
+Matahari adalah pusat tata surya dan sumber cahaya utama bagi bumi. Dalam ilmu falak, posisi matahari digunakan untuk menentukan waktu salat, arah bayangan, dan fenomena siang serta malam. Pergerakan semu matahari akibat rotasi bumi menjadi dasar dalam penentuan waktu Zuhur, Asar, Magrib, dan Isya.
+</p>
+
+<p>
+📌 <b>Peran matahari dalam ilmu falak:</b><br><br>
+
+Menentukan waktu salat<br>
+Menentukan arah bayangan benda<br>
+Menentukan terjadinya siang dan malam<br>
+Menentukan gerhana matahari
+</p>
+
+<p>
+✨ Tinggi dan posisi matahari selalu berubah setiap waktu sehingga digunakan dalam perhitungan astronomi.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>2️⃣ 🌕 Bulan</h3>
+
+<p>
+Bulan adalah satelit alami bumi yang memiliki peranan penting dalam penanggalan Islam. Dalam ilmu falak, bulan digunakan sebagai dasar penentuan kalender hijriah, awal bulan kamariah, dan pengamatan hilal.
+</p>
+
+<p>
+📌 <b>Peran bulan dalam ilmu falak:</b><br><br>
+
+Penentuan awal bulan hijriah<br>
+Pengamatan hilal<br>
+Penentuan fase bulan<br>
+Penentuan gerhana bulan
+</p>
+
+<p>
+✨ Fase bulan terjadi karena perubahan posisi bulan terhadap bumi dan matahari.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>3️⃣ 🌍 Bumi</h3>
+
+<p>
+Bumi merupakan tempat berlangsungnya pengamatan astronomi dalam ilmu falak. Rotasi bumi menyebabkan terjadinya pergantian siang dan malam, sedangkan revolusi bumi menyebabkan perubahan musim dan pergeseran posisi matahari.
+</p>
+
+<p>
+📌 <b>Gerakan bumi:</b><br><br>
+
+Rotasi bumi → bumi berputar pada porosnya<br>
+Revolusi bumi → bumi mengelilingi matahari
+</p>
+
+<p>
+✨ Rotasi bumi menjadi dasar utama dalam perhitungan waktu harian dan waktu salat.
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>4️⃣ ⭐ Bintang</h3>
+
+<p>
+Bintang adalah benda langit yang memancarkan cahaya sendiri. Dalam sejarah ilmu falak, bintang digunakan sebagai petunjuk arah dan navigasi, terutama pada malam hari.
+</p>
+
+<p>
+📌 <b>Fungsi bintang:</b><br><br>
+
+Penunjuk arah<br>
+Navigasi pelayaran<br>
+Pengamatan astronomi
+</p>
+
+<p>
+✨ Salah satu bintang yang sering digunakan sebagai penunjuk arah adalah Bintang Utara (Polaris).
+</p>
+
+</div>
+
+<br>
+
+<div class="box">
+
+<h3>🌠 Hubungan Benda Langit dengan Ilmu Falak</h3>
+
+<p>
+Ilmu falak memanfaatkan pergerakan benda-benda langit untuk berbagai kebutuhan astronomi dan ibadah dalam Islam.
+</p>
+
+<p>
+📌 <b>Contohnya:</b><br><br>
+
+Matahari → menentukan waktu salat<br>
+Bulan → menentukan awal bulan hijriah<br>
+Bumi → menentukan perbedaan waktu wilayah<br>
+Bintang → membantu navigasi dan arah
+</p>
+
+<p>
+✨ Oleh karena itu, pengamatan benda langit menjadi dasar utama dalam perkembangan ilmu falak dan astronomi modern.
+</p>
+
+</div>
+
+</div>`;
+}
+
+// ================= HISAB =================
+function showHisab(){
+content.innerHTML=`
+
+<div class="planet p1"></div>
+<div class="planet p2"></div>
+
+<div class="main-box">
+
+<h2>🌙 Penentuan Awal Bulan Hijriah</h2>
+
+<div class="box">
+
+<p>
+Penentuan awal bulan Hijriah adalah proses menetapkan dimulainya suatu bulan dalam kalender Islam berdasarkan peredaran bulan terhadap bumi. Kalender Hijriah menggunakan sistem penanggalan kamariah, yaitu penanggalan yang didasarkan pada siklus peredaran bulan mengelilingi bumi, bukan berdasarkan peredaran matahari seperti kalender masehi. Oleh karena itu, pergantian bulan dalam kalender Hijriah ditentukan melalui pengamatan dan perhitungan posisi bulan.
+</p>
+
+<p>
+Awal bulan Hijriah dimulai ketika hilal, yaitu bulan sabit pertama, telah muncul setelah terjadinya ijtima’ atau konjungsi. Ijtima’ merupakan peristiwa ketika matahari, bumi, dan bulan berada pada satu garis lurus sehingga bulan tidak terlihat dari bumi. Setelah ijtima’ terjadi dan hilal dapat terlihat di ufuk barat setelah matahari terbenam, maka ditetapkan sebagai awal bulan baru dalam kalender Hijriah.
+</p>
+
+</div>
+
+<h3>📌 Kedudukan Penentuan Awal Bulan Hijriah</h3>
+
+<div class="box">
+
+<p>
+Dalam Islam, penentuan awal bulan Hijriah memiliki kedudukan yang sangat penting karena berkaitan langsung dengan pelaksanaan ibadah umat Islam, seperti:
+</p>
+
+<ul>
+<li>🌙 Awal bulan Ramadan</li>
+<li>🎉 Hari Raya Idulfitri</li>
+<li>🐄 Hari Raya Idul Adha</li>
+<li>🕋 Penentuan waktu ibadah haji</li>
+</ul>
+
+</div>
+
+<hr>
+
+<h2>📖 Dasar Hukum Penentuan Awal Bulan Hijriah</h2>
+
+<div class="box">
+
+<p>
+Dasar penentuan awal bulan Hijriah dijelaskan dalam Al-Qur’an dan hadis Rasulullah SAW. Salah satu dasar hukum terdapat dalam Surah Al-Baqarah ayat 189:
+</p>
+
+<div class="rumus"
+style="
+font-size:24px;
+text-align:center;
+line-height:2;
+font-family:'Traditional Arabic', serif;
+">
+يَسْـَٔلُونَكَ عَنِ ٱلْأَهِلَّةِ ۖ قُلْ هِىَ مَوَٰقِيتُ لِلنَّاسِ وَٱلْحَجِّ
+</div>
+
+<br>
+
+<p>
+Artinya:
+“Mereka bertanya kepadamu tentang bulan sabit. Katakanlah: Bulan sabit itu adalah tanda-tanda waktu bagi manusia dan bagi ibadah haji.” (Q.S. Al-Baqarah: 189)
+</p>
+
+</div>
+
+<div class="box">
+
+<p>
+Dalam Hadist, Rasulullah SAW bersabda:
+</p>
+
+<div class="rumus"
+style="
+font-size:24px;
+text-align:center;
+line-height:2;
+font-family:'Traditional Arabic', serif;
+">
+صُومُوا لِرُؤْيَتِهِ وَأَفْطِرُوا لِرُؤْيَتِهِ
+</div>
+
+<br>
+
+<p>
+Artinya:
+“Berpuasalah kalian karena melihat hilal dan berbukalah kalian karena melihat hilal.” (HR. Bukhari dan Muslim)
+</p>
+
+<p>
+Dalil tersebut menjelaskan bahwa peredaran bulan dijadikan sebagai penentu waktu dan penanggalan bagi manusia, termasuk dalam pelaksanaan ibadah.
+</p>
+
+</div>
+
+<hr>
+
+<h2>🌙 Hisab dan Rukyat dalam Penentuan Awal Bulan</h2>
+
+<div class="box">
+
+<p>
+Hisab dan rukyat merupakan dua metode utama yang digunakan dalam penentuan awal bulan Hijriah dalam ilmu falak. Kedua metode tersebut digunakan untuk mengetahui masuknya bulan baru dalam kalender Islam, khususnya pada bulan-bulan penting seperti Ramadan, Syawal, dan Zulhijah.
+</p>
+
+</div>
+
+<h3>1️⃣ Metode Hisab</h3>
+
+<div class="box">
+
+<p>
+Hisab adalah metode penentuan awal bulan Hijriah menggunakan perhitungan astronomi. Metode ini dilakukan dengan menghitung posisi bulan, matahari, dan bumi berdasarkan data astronomi dan rumus perhitungan tertentu.
+</p>
+
+<p>
+Melalui metode hisab, dapat diketahui waktu terjadinya ijtima’, posisi hilal, tinggi bulan, serta kemungkinan terlihatnya hilal setelah matahari terbenam.
+</p>
+
+<p>
+📌 Dalam metode hisab, data yang dihitung meliputi:
+</p>
+
+<ul>
+<li>☀️ Posisi matahari</li>
+<li>🌙 Posisi bulan</li>
+<li>📏 Tinggi hilal</li>
+<li>📐 Sudut elongasi bulan</li>
+<li>⏰ Waktu ijtima’</li>
+</ul>
+
+</div>
+
+<h2>📚 Jenis-Jenis Hisab Dalam Penentuan Awal Bulan Hijriah</h2>
+
+<div class="box">
+
+<h3>1. Hisab Urfi</h3>
+
+<p>
+Hisab urfi adalah metode penentuan kalender Hijriah berdasarkan jumlah hari rata-rata dalam satu bulan tanpa menghitung posisi bulan secara astronomi.
+</p>
+
+<p>
+Metode ini menggunakan sistem penanggalan tetap, yaitu bulan ganjil berjumlah 30 hari dan bulan genap berjumlah 29 hari secara bergantian.
+</p>
+
+<h3>📌 Poin Penting Hisab Urfi</h3>
+
+<h3>a. Jumlah Hari Setiap Bulan</h3>
+
+<ul>
+<li>🌙 Bulan ganjil berjumlah 30 hari</li>
+<li>🌙 Bulan genap berjumlah 29 hari</li>
+</ul>
+
+<p>
+Bulan ganjil:
+Muharram, Rabiul Awal, Jumadil Akhir, Dzulqaidah, Dzulhijah.
+</p>
+
+<p>
+Bulan genap:
+Safar, Rabiul Akhir, Jumadil Awal, Rajab, Sya’ban.
+</p>
+
+<h3>b. Tahun Kabisat</h3>
+
+<p>
+Karena peredaran bulan sebenarnya tidak tepat 354 hari, maka dalam hisab urfi digunakan tahun kabisat untuk menyesuaikan kekurangan waktu.
+</p>
+
+<ul>
+<li>📅 Tahun biasa → 354 hari</li>
+<li>📅 Tahun kabisat → 355 hari</li>
+</ul>
+
+<p>
+Pada tahun kabisat, bulan Zulhijah ditambah menjadi 30 hari.
+</p>
+
+<h3>c. Daur / Siklus Tahun Hijriyah</h3>
+
+<p>
+Hisab urfi menggunakan sistem daur atau siklus selama 30 tahun.
+</p>
+
+<p>
+Dalam 30 tahun terdapat:
+</p>
+
+<ul>
+<li>19 tahun biasa</li>
+<li>11 tahun kabisat</li>
+</ul>
+
+<p>
+Tahun kabisat terjadi pada tahun:
+2, 5, 7, 10, 13, 16, 18, 21, 24, 26, dan 29.
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>2. Hisab Hakiki</h3>
+
+<p>
+Hisab hakiki adalah metode penentuan awal bulan Hijriah berdasarkan posisi bulan yang sebenarnya menurut perhitungan astronomi.
+</p>
+
+<p>
+Metode ini menghitung secara detail pergerakan bulan dan matahari untuk mengetahui kemungkinan terlihatnya hilal setelah matahari terbenam.
+</p>
+
+<p>
+Dalam hisab hakiki, penentuan awal bulan dilakukan dengan menghitung beberapa data astronomi, seperti:
+</p>
+
+<ul>
+<li>🌙 Waktu ijtima’ (konjungsi)</li>
+<li>📏 Tinggi hilal</li>
+<li>📐 Elongasi bulan</li>
+<li>🧭 Azimut matahari dan bulan</li>
+<li>⏳ Lama hilal berada di atas ufuk</li>
+</ul>
+
+<p>
+Metode ini menggunakan rumus astronomi dan data observasi sehingga hasil perhitungannya lebih akurat dibanding hisab urfi.
+</p>
+
+</div>
+
+<h3>2️⃣ Metode Rukyat</h3>
+
+<div class="box">
+
+<p>
+Metode rukyat adalah metode penentuan awal bulan Hijriah dengan cara mengamati hilal secara langsung setelah matahari terbenam.
+</p>
+
+<p>
+Hilal merupakan bulan sabit pertama yang muncul setelah terjadinya ijtima’ atau konjungsi, yaitu ketika matahari, bumi, dan bulan berada pada satu garis lurus.
+</p>
+
+<p>
+Rukyat dilakukan pada akhir bulan kamariah, khususnya pada tanggal 29 bulan berjalan, untuk memastikan apakah hilal sudah terlihat atau belum terlihat di ufuk barat.
+</p>
+
+<ul>
+<li>✅ Jika hilal terlihat → ditetapkan masuk awal bulan baru Hijriah</li>
+<li>❌ Jika hilal tidak terlihat → bulan disempurnakan menjadi 30 hari</li>
+</ul>
+
+<h3>🔭 Pengamatan rukyat dapat dilakukan menggunakan:</h3>
+
+<ul>
+<li>👁️ Mata telanjang</li>
+<li>🔭 Teleskop</li>
+<li>📷 Kamera astronomi</li>
+<li>💻 Alat observasi modern</li>
+</ul>
+
+<p>
+Metode rukyat sangat bergantung pada kondisi cuaca, lokasi pengamatan, dan ketinggian hilal sehingga hasilnya bisa berbeda-beda di setiap wilayah.
+</p>
+
+<p>
+Oleh karena itu, metode hisab digunakan untuk memprediksi kemungkinan terlihatnya hilal sebelum dilakukan rukyat.
+</p>
+
+</div>
+
+</div>
+
+`;
+}
+
+// ================= KIBLAT =================
+function showKiblat(){
+content.innerHTML=`
+<div class="main-box">
+<h2>🧭 Arah Kiblat</h2>
+
+<p>
+Arah kiblat adalah arah menuju Ka'bah di Makkah.
+</p>
+
+<h3>Metode Penentuan</h3>
+<ul>
+<li>Kompas</li>
+<li>Bayangan Matahari</li>
+<li>Trigonometri Bola</li>
+<li>Aplikasi astronomi</li>
+</ul>
+
+<h3>Rumus Dasar</h3>
+<div class="rumus">
+Tan Q = sin(ΔB) :
+(cos L x tan MK - sin L x cos ΔB)
+</div>
+</div>`;
+}
+
+// ================= KALKULATOR SHOLAT =================
+function showSholat(){
+content.innerHTML=`
+
+<div class="main-box">
+
+<h2>🕌 Kalkulator Waktu Sholat</h2>
+
+<h3>🌙 Pengertian dan Dasar Waktu Sholat</h3>
+
+<p>
+Waktu sholat merupakan ketentuan waktu pelaksanaan ibadah salat fardu yang telah ditetapkan berdasarkan posisi matahari terhadap bumi. Dalam ilmu falak, penentuan waktu sholat dilakukan melalui pengamatan dan perhitungan astronomi terhadap pergerakan matahari, seperti tinggi matahari, posisi matahari, dan perubahan cahaya di langit. Setiap salat memiliki batas waktu tertentu yang menjadi syarat sah pelaksanaan ibadah, sehingga salat tidak dapat dilakukan secara sembarangan di luar waktu yang telah ditentukan.
+</p>
+
+<p>
+Dasar penetapan waktu sholat dijelaskan dalam Al-Qur’an dan hadis Nabi Muhammad SAW.
+</p>
+
+<h3>📖 Q.S. An-Nisa Ayat 103</h3>
+
+<div class="rumus" style="font-size:24px;text-align:center;line-height:2;font-family:'Traditional Arabic', serif;">
+إِنَّ ٱلصَّلَوٰةَ كَانَتْ عَلَى ٱلْمُؤْمِنِينَ كِتَٰبًا مَّوْقُوتًا
+</div>
+
+<br>
+
+<p>
+Artinya:
+“Sesungguhnya salat itu adalah kewajiban yang ditentukan waktunya atas orang-orang yang beriman.” (Q.S. An-Nisa: 103)
+</p>
+
+<p>
+Ayat tersebut menjelaskan bahwa salat memiliki waktu-waktu tertentu yang telah ditetapkan oleh Allah SWT sehingga pelaksanaannya harus dilakukan sesuai ketentuan waktu yang berlaku.
+</p>
+
+<h3>📜 Hadis Rasulullah SAW</h3>
+
+<div class="rumus" style="font-size:22px;text-align:right;line-height:2.2;font-family:'Traditional Arabic', serif;">
+عَنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو أَنَّ رَسُولَ اللَّهِ ﷺ قَالَ: وَقْتُ الظُّهْرِ إِذَا زَالَتِ الشَّمْسُ، وَكَانَ ظِلُّ الرَّجُلِ كَطُولِهِ، مَا لَمْ يَحْضُرِ الْعَصْرُ، وَوَقْتُ الْعَصْرِ مَا لَمْ تَصْفَرَّ الشَّمْسُ، وَوَقْتُ الْمَغْرِبِ مَا لَمْ يَغِبِ الشَّفَقُ، وَوَقْتُ الْعِشَاءِ إِلَى نِصْفِ اللَّيْلِ الْأَوْسَطِ، وَوَقْتُ الصُّبْحِ مِنْ طُلُوعِ الْفَجْرِ مَا لَمْ تَطْلُعِ الشَّمْسُ
+</div>
+
+<br>
+
+<p>
+Artinya:
+“Waktu Zuhur dimulai ketika matahari tergelincir sampai bayangan seseorang sama dengan tingginya selama belum masuk waktu Asar. Waktu Asar berlangsung selama matahari belum menguning. Waktu Magrib berlangsung selama cahaya merah belum hilang. Waktu Isya sampai pertengahan malam. Dan waktu Subuh dimulai sejak terbit fajar hingga sebelum matahari terbit.” (HR. Muslim)
+</p>
+
+<p>
+Bisa disimpulkan bahwa waktu sholat ditentukan berdasarkan posisi matahari dan fenomena alam yang terjadi di langit, sehingga penentuan waktu sholat sangat bergantung pada ilmu falak untuk menghitung dan menentukan waktu yang tepat sesuai dengan ketentuan syariat Islam.
+</p>
+
+<h3>🕌 Penjelasan Waktu Sholat</h3>
+
+<div class="box">
+
+<p>
+🌅 <b>Sholat Subuh</b> → dimulai sejak munculnya fajar ṣādiq, yaitu cahaya putih yang membentang secara horizontal di ufuk timur, dan berakhir ketika matahari mulai terbit.
+</p>
+
+<br>
+
+<p>
+☀️ <b>Sholat Dzuhur</b> → dimulai ketika matahari telah tergelincir dari titik kulminasi (zawal), yaitu saat matahari mulai bergerak ke arah barat setelah berada pada posisi tertinggi di langit.
+</p>
+
+<br>
+
+<p>
+🌤️ <b>Sholat Ashar</b> → dimulai ketika panjang bayangan suatu benda telah sama dengan panjang bendanya menurut jumhur ulama, selain bayangan saat matahari berada di titik kulminasi.
+</p>
+
+<br>
+
+<p>
+🌇 <b>Sholat Maghrib</b> → dimulai sejak seluruh piringan matahari terbenam sempurna di bawah ufuk barat dan berakhir ketika cahaya merah (syafaq) di langit barat menghilang.
+</p>
+
+<br>
+
+<p>
+🌌 <b>Sholat Isya</b> → dimulai setelah hilangnya cahaya merah (syafaq ahmar) di langit barat akibat terbenamnya matahari.
+</p>
+
+</div>
+
+<hr style="margin:30px 0;border:none;height:1px;background:rgba(255,255,255,.2);">
+
+<h2>🕌 Perhitungan Waktu Sholat dalam Ilmu Falak</h2>
+
+<p>
+Perhitungan waktu sholat dalam ilmu falak dilakukan dengan menggunakan data astronomi berdasarkan posisi matahari terhadap bumi.
+</p>
+
+<div class="box">
+
+<p>🌍 <b>Lintang Tempat (p)</b></p>
+<p>🧭 <b>Garis Bujur / Lamda (λ)</b></p>
+<p>☀️ <b>Deklinasi Matahari (d)</b></p>
+<p>⏰ <b>Equation of Time (e)</b></p>
+<p>📐 <b>Tinggi Matahari (h)</b></p>
+<p>➕ <b>Ikhtiyat (i)</b></p>
+
+</div>
+
+<hr>
+
+<h3>📥 Data Manual</h3>
+
+EoT (e):
+<input id="e_d" type="number">°
+<input id="e_m" type="number">'
+<input id="e_s" type="number">"
+
+<br><br>
+
+Deklinasi Matahari (d):
+<input id="d_d" type="number">°
+<input id="d_m" type="number">'
+<input id="d_s" type="number">"
+
+<br><br>
+
+Lintang Tempat (p):
+<input id="p_d" type="number">°
+<input id="p_m" type="number">'
+<input id="p_s" type="number">"
+
+<br><br>
+
+Bujur Tempat (λ):
+<input id="lam_d" type="number">°
+<input id="lam_m" type="number">'
+<input id="lam_s" type="number">"
+
+<br><br>
+
+LMT:
+<input id="lmt_d" type="number">°
+<input id="lmt_m" type="number">'
+<input id="lmt_s" type="number">"
+
+<br><br>
+
+Ikhtiyat:
+<input id="i_d" type="number">°
+<input id="i_m" type="number">'
+<input id="i_s" type="number">"
+
+<hr>
+
+<h3>Zuhur</h3>
+
+<div class="rumus">
+Z = 12 - e + (LMT - λ) : 15 + ikhtiyat
+</div>
+
+<button onclick="zuhur()">Hitung Zuhur</button>
+
+<div class="box" id="outZ"></div>
+
+<h3>Ashar</h3>
+
+<div class="rumus">
+h = tan⁻¹(1 / (tan |p-d| + 1))
+</div>
+
+<button onclick="ashar()">Hitung Ashar</button>
+
+<div class="box" id="outA"></div>
+
+<h3>Maghrib</h3>
+
+<button onclick="maghrib()">Hitung Maghrib</button>
+
+<div class="box" id="outM"></div>
+
+<h3>Isya</h3>
+
+<button onclick="isya()">Hitung Isya</button>
+
+<div class="box" id="outI"></div>
+
+<h3>Subuh</h3>
+
+<button onclick="subuh()">Hitung Subuh</button>
+
+<div class="box" id="outS"></div>
+
+</div>
+
+`;
+}
+
+
+/* ================= HIJRIAH KE MASEHI ================= */
+
+function showHijriah(){
+
+content.innerHTML=`
+
+<div class="main-box">
+
+<h2>📅 Kalkulator Hijriah ke Masehi</h2>
+
+Tahun Hijriah:
+<input id="tahunH" value="1425">
+
+<br><br>
+
+Bulan Hijriah:
+<input id="bulanH" value="3">
+
+<br><br>
+
+Tanggal:
+<input id="hariH" value="12">
+
+<br><br>
+
+<button onclick="hitungHijriah()">
+PROSES
+</button>
+
+<div id="hasilHijriah"></div>
+
+</div>
+
+`;
+
+}
+
+function hitungHijriah(){
+
+let tahun=parseInt(document.getElementById("tahunH").value);
+let bulan=parseInt(document.getElementById("bulanH").value);
+let hari=parseInt(document.getElementById("hariH").value);
+
+let html=`
+
+<table style="
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+">
+
+<tr>
+<th style="border:1px solid rgba(255,255,255,.2);padding:10px;">No</th>
+<th style="border:1px solid rgba(255,255,255,.2);padding:10px;">Langkah</th>
+<th style="border:1px solid rgba(255,255,255,.2);padding:10px;">Hasil</th>
+</tr>
+
+`;
+
+let kabisatH=[2,5,7,10,13,16,18,21,24,26,29];
+let umurBulan=[0,30,59,89,118,148,177,207,236,266,295,325];
+
+let hariArr=["Kamis","Jumat","Sabtu","Ahad","Senin","Selasa","Rabu"];
+let pasarArr=["Kliwon","Legi","Pahing","Pon","Wage"];
+
+let y1=tahun-1;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">2</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Tahun - 1</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${y1}</td>
+</tr>
+`;
+
+let daur=Math.floor(y1/30);
+let sisaTahun=y1%30;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">3</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">÷30</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${daur} daur, sisa ${sisaTahun}</td>
+</tr>
+`;
+
+let hariDaur=daur*10631;
+let hariTahun=sisaTahun*354;
+let tambahanKabisat=kabisatH.filter(x=>x<=sisaTahun).length;
+
+let total4=hariDaur+hariTahun+tambahanKabisat;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">4</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Daur × 10631</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${hariDaur}</td>
+</tr>
+
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;"></td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Tahun × 354</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${hariTahun}</td>
+</tr>
+
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;"></td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Kabisat Hijriah</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${tambahanKabisat}</td>
+</tr>
+`;
+
+let umur=umurBulan[bulan-1];
+let jumlah=total4+umur+hari;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">5</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Total Hari</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${jumlah}</td>
+</tr>
+`;
+
+let total=jumlah+227016+13;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">6</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">+227016 +13</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${total}</td>
+</tr>
+`;
+
+let sisa7=jumlah%7;
+let sisa5=jumlah%5;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">7</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Hari</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${hariArr[sisa7]}</td>
+</tr>
+
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">8</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Pasaran</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${pasarArr[sisa5]}</td>
+</tr>
+`;
+
+let siklus4=Math.floor(total/1461);
+let sisaHari=total%1461;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">9</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">÷1461</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">${siklus4}, sisa ${sisaHari}</td>
+</tr>
+`;
+
+let tahunM=siklus4*4;
+let tahunTambahan=Math.floor(sisaHari/365);
+let sisa365=sisaHari%365;
+
+tahunM+=tahunTambahan;
+
+function kabisatM(y){
+return (y%4==0 && y%100!=0) || (y%400==0);
+}
+
+let bulanM=[
+["Jan",31],
+["Feb",kabisatM(tahunM)?29:28],
+["Mar",31],
+["Apr",30],
+["Mei",31],
+["Jun",30],
+["Jul",31],
+["Agt",31],
+["Sep",30],
+["Okt",31],
+["Nov",30],
+["Des",31]
+];
+
+let sisa=sisa365;
+let bulanNama="";
+let tanggalM=0;
+
+for(let i=0;i<12;i++){
+
+if(sisa>bulanM[i][1]){
+sisa-=bulanM[i][1];
+}else{
+bulanNama=bulanM[i][0];
+tanggalM=sisa;
+break;
+}
+
+}
+
+let tahunFinal=tahunM+1;
+
+html+=`
+<tr>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">10</td>
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">Hasil</td>
+
+<td style="border:1px solid rgba(255,255,255,.2);padding:10px;">
+
+<b>
+${hariArr[sisa7]} ${pasarArr[sisa5]},
+${tanggalM} ${bulanNama} ${tahunFinal}
+</b>
+
+</td>
+</tr>
+
+</table>
+`;
+
+document.getElementById("hasilHijriah").innerHTML=html;
+
+}
+
+
+// ================= KONVERSI =================
+function dmsToSec(d,m,s){
+let neg=(d<0||m<0||s<0);
+d=Math.abs(d);
+m=Math.abs(m);
+s=Math.abs(s);
+let val=(d*3600)+(m*60)+s;
+return neg?-val:val;
+}
+
+function dmsToDeg(d,m,s){
+let neg=(d<0||m<0||s<0);
+d=Math.abs(d);
+m=Math.abs(m);
+s=Math.abs(s);
+let val=d+(m/60)+(s/3600);
+return neg?-val:val;
+}
+
+function rad(x){
+return x*Math.PI/180;
+}
+
+function deg(x){
+return x*180/Math.PI;
+}
+
+function toTime(x){
+let j=Math.floor(x);
+let m=Math.floor((x-j)*60);
+let s=Math.round((((x-j)*60)-m)*60);
+return j+' jam '+m+' menit '+s+' detik';
+}
+
+function toDMS(x){
+
+let t=x<0?'-':'';
+
+x=Math.abs(x);
+
+let d=Math.floor(x);
+let m=Math.floor((x-d)*60);
+let s=((((x-d)*60)-m)*60).toFixed(2);
+
+return t+d+'° '+m+"' "+s+'"';
+}
+
+// khusus jam sudut ke waktu
+function degreeToTime(x){
+
+let totalSeconds=(x/15)*3600;
+
+let j=Math.floor(totalSeconds/3600);
+let m=Math.floor((totalSeconds%3600)/60);
+let s=(totalSeconds%60).toFixed(2);
+
+return j+' jam '+m+' menit '+s+' detik';
+}
+
+let Z=0;
+
+function getP(){
+return dmsToDeg(+p_d.value||0,+p_m.value||0,+p_s.value||0);
+}
+
+function getD(){
+return dmsToDeg(+d_d.value||0,+d_m.value||0,+d_s.value||0);
+}
+
+// ================= ZUHUR =================
+function zuhur(){
+
+let e=dmsToSec(+e_d.value||0,+e_m.value||0,+e_s.value||0);
+let lmt=dmsToSec(+lmt_d.value||0,+lmt_m.value||0,+lmt_s.value||0);
+let lam=dmsToSec(+lam_d.value||0,+lam_m.value||0,+lam_s.value||0);
+let ik=dmsToSec(+i_d.value||0,+i_m.value||0,+i_s.value||0);
+
+let total=(12*3600)-e+((lmt-lam)/15)+ik;
+
+Z=total/3600;
+
+outZ.innerHTML=`
+<b>Rumus:</b>
+<div class="rumus">
+Z = 12 - e + (LMT - λ) : 15 + ikhtiyat
+
+<br><br>
+
+Z = 12
+- (${toTime(e/3600)})
++
+(
+${toTime(lmt/3600)}
+-
+${toTime(lam/3600)}
+) : 15
++
+${toTime(ik/3600)}
+</div>
+
+<br>
+
+<b>Hasil Zuhur:</b><br><br>
+${toTime(Z)}
+`;
+}
+
+// ================= ASHAR =================
+function ashar(){
+
+let p=getP();
+let d=getD();
+
+let hRad=Math.atan(1/(Math.tan(rad(Math.abs(p-d)))+1));
+let hDeg=deg(hRad);
+
+let tRad=Math.acos(
+(
+(-Math.tan(rad(p))*Math.tan(rad(d)))
++
+Math.sin(hRad)
+)
+/
+(
+Math.cos(rad(p))*Math.cos(rad(d))
+)
+);
+
+let tDeg=deg(tRad);
+let tJam=tDeg/15;
+let hasil=Z+tJam;
+
+outA.innerHTML=`
+<b>Rumus h:</b>
+<div class="rumus">
+h = tan⁻¹
+(
+1 :
+(
+tan | ${toDMS(p)} - ${toDMS(d)} |
++ 1
+)
+)
+
+<br><br>
+
+h = ${toDMS(hDeg)}
+</div>
+
+<br>
+
+<b>Rumus t:</b>
+<div class="rumus">
+t = cos⁻¹
+(
+(
+-tan ${toDMS(p)}
+· tan ${toDMS(d)}
++ sin ${toDMS(hDeg)}
+)
+:
+(
+cos ${toDMS(p)}
+· cos ${toDMS(d)}
+)
+)
+:15
+
+<br><br>
+
+t = ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Z + t:</b>
+<div class="rumus">
+${toTime(Z)} + ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Hasil Ashar:</b><br><br>
+${toTime(hasil)}
+`;
+}
+
+// ================= MAGHRIB =================
+function maghrib(){
+
+let p=getP();
+let d=getD();
+let h=-1;
+
+let tRad=Math.acos(
+(
+(-Math.tan(rad(p))*Math.tan(rad(d)))
++
+Math.sin(rad(h))
+)
+/
+(
+Math.cos(rad(p))*Math.cos(rad(d))
+)
+);
+
+let tDeg=deg(tRad);
+let tJam=tDeg/15;
+let hasil=Z+tJam;
+
+outM.innerHTML=`
+<b>Rumus:</b>
+<div class="rumus">
+h = -1°
+
+<br><br>
+
+t = cos⁻¹
+(
+(
+-tan ${toDMS(p)}
+· tan ${toDMS(d)}
++ sin(-1°)
+)
+:
+(
+cos ${toDMS(p)}
+· cos ${toDMS(d)}
+)
+)
+:15
+
+<br><br>
+
+t = ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Z + t:</b>
+<div class="rumus">
+${toTime(Z)} + ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Hasil Maghrib:</b><br><br>
+${toTime(hasil)}
+`;
+}
+
+// ================= ISYA =================
+function isya(){
+
+let p=getP();
+let d=getD();
+let h=-18;
+
+let tRad=Math.acos(
+(
+(-Math.tan(rad(p))*Math.tan(rad(d)))
++
+Math.sin(rad(h))
+)
+/
+(
+Math.cos(rad(p))*Math.cos(rad(d))
+)
+);
+
+let tDeg=deg(tRad);
+let tJam=tDeg/15;
+let hasil=Z+tJam;
+
+outI.innerHTML=`
+<b>Rumus:</b>
+<div class="rumus">
+h = -18°
+
+<br><br>
+
+t = cos⁻¹
+(
+(
+-tan ${toDMS(p)}
+· tan ${toDMS(d)}
++ sin(-18°)
+)
+:
+(
+cos ${toDMS(p)}
+· cos ${toDMS(d)}
+)
+)
+:15
+
+<br><br>
+
+t = ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Z + t:</b>
+<div class="rumus">
+${toTime(Z)} + ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Hasil Isya:</b><br><br>
+${toTime(hasil)}
+`;
+}
+
+// ================= SUBUH =================
+function subuh(){
+
+let p=getP();
+let d=getD();
+let h=20;
+
+let tRad=Math.acos(
+(
+(-Math.tan(rad(p))*Math.tan(rad(d)))
+-
+Math.sin(rad(h))
+)
+/
+(
+Math.cos(rad(p))*Math.cos(rad(d))
+)
+);
+
+let tDeg=deg(tRad);
+let tJam=tDeg/15;
+let hasil=Z-tJam;
+
+outS.innerHTML=`
+<b>Rumus:</b>
+<div class="rumus">
+h = -20°
+
+<br><br>
+
+t = cos⁻¹
+(
+(
+-tan ${toDMS(p)}
+· tan ${toDMS(d)}
+- sin(20°)
+)
+:
+(
+cos ${toDMS(p)}
+· cos ${toDMS(d)}
+)
+)
+:15
+
+<br><br>
+
+t = ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Z - t:</b>
+<div class="rumus">
+${toTime(Z)} - ${degreeToTime(tDeg)}
+</div>
+
+<br>
+
+<b>Hasil Subuh:</b><br><br>
+${toTime(hasil)}
+`;
+}
+/* ================= MASEHI KE HIJRIAH ================= */
+
+function showMasehiHijri(){
+
+content.innerHTML=`
+
+<div class="main-box">
+
+<h2>🗓️ Hisab ‘Urfi Masehi ke Hijriah</h2>
+
+<table
+style="
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+">
+
+<tr>
+<th>No</th>
+<th>Keterangan</th>
+<th>Langkah</th>
+<th>Hasil</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Tahun Utuh ÷ 4</td>
+
+<td>
+<input id="v1" oninput="step1()">
+÷ 4
+</td>
+
+<td id="h1"></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Sisa Tahun</td>
+<td>Desimal × 4</td>
+<td id="h2"></td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Siklus → Hari</td>
+
+<td>
+<input id="v3" oninput="step3()">
+× 1461
+</td>
+
+<td id="h3"></td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Sisa Tahun → Hari</td>
+
+<td>
+<input id="v4" oninput="step4()">
+× 365
+</td>
+
+<td id="h4"></td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Bulan → Hari</td>
+
+<td>
+<input id="v5" oninput="step5()">
+× 1
+</td>
+
+<td id="h5"></td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>Tanggal → Hari</td>
+
+<td>
+<input id="v6" oninput="step6()">
+× 1
+</td>
+
+<td id="h6"></td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>Total Hari</td>
+<td>Jumlah</td>
+<td id="h7"></td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>Koreksi</td>
+<td>-13</td>
+<td id="h8"></td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>Hijriyah</td>
+<td>-227016</td>
+<td id="h9"></td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>Bagi 7</td>
+<td>÷7</td>
+<td id="h10"></td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>Desimal 7</td>
+<td>Ambil desimal</td>
+<td id="h10a"></td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>Hari × 7</td>
+<td>Desimal × 7</td>
+<td id="h10b"></td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>Hari</td>
+<td>Mapping</td>
+<td id="h11"></td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>Bagi 5</td>
+<td>÷5</td>
+<td id="h12"></td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>Desimal 5</td>
+<td>Ambil desimal</td>
+<td id="h12a"></td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>Pasaran × 5</td>
+<td>Desimal × 5</td>
+<td id="h12b"></td>
+</tr>
+
+<tr>
+<td>17</td>
+<td>Pasaran</td>
+<td>Mapping</td>
+<td id="h13"></td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>Siklus Hijri</td>
+<td>÷10631</td>
+<td id="h14"></td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>Sisa Hari</td>
+<td>×10631</td>
+<td id="h15"></td>
+</tr>
+
+<tr>
+<td>20</td>
+<td>Tahun Hijri</td>
+<td>×30</td>
+<td id="h16"></td>
+</tr>
+
+<tr>
+<td>21</td>
+<td>Tambahan Tahun</td>
+<td>÷354</td>
+<td id="h17"></td>
+</tr>
+
+<tr>
+<td>22</td>
+<td>Kabisat</td>
+<td>Auto</td>
+<td id="h18"></td>
+</tr>
+
+<tr>
+<td>23</td>
+<td>Sisa Hari Final</td>
+<td>-kabisat</td>
+<td id="h19"></td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>Hasil</td>
+<td>-</td>
+<td id="h20"></td>
+</tr>
+
+</table>
+
+<div
+class="box"
+id="hasil">
+</div>
+
+</div>
+
+`;
+
+}
+
+/* ================= FUNCTION ================= */
+
+function val(id){
+
+return parseFloat(
+document.getElementById(id).value
+) || 0;
+
+}
+
+/* ================= STEP 1 ================= */
+
+function step1(){
+
+let t = val("v1");
+
+let bagi = t/4;
+
+let siklus =
+Math.floor(bagi);
+
+let sisa =
+(bagi - siklus)*4;
+
+h1.innerText=siklus;
+
+h2.innerText=
+sisa.toFixed(4);
+
+}
+
+/* ================= STEP 3 ================= */
+
+function step3(){
+
+h3.innerText=
+val("v3")*1461;
+
+hitungMasehi();
+
+}
+
+function step4(){
+
+h4.innerText=
+val("v4")*365;
+
+hitungMasehi();
+
+}
+
+function step5(){
+
+h5.innerText=
+val("v5")*1;
+
+hitungMasehi();
+
+}
+
+function step6(){
+
+h6.innerText=
+val("v6");
+
+hitungMasehi();
+
+}
+
+/* ================= HITUNG ================= */
+
+function hitungMasehi(){
+
+let h3v=+h3.innerText||0;
+let h4v=+h4.innerText||0;
+let h5v=+h5.innerText||0;
+let h6v=+h6.innerText||0;
+
+let total =
+h3v+h4v+h5v+h6v;
+
+let masehi =
+total-13;
+
+let hijri =
+masehi-227016;
+
+h7.innerText=total;
+h8.innerText=masehi;
+h9.innerText=hijri;
+
+/* HARI */
+
+let bagi7 =
+hijri / 7;
+
+let desimal7 =
+bagi7 - Math.floor(bagi7);
+
+let hasilHari =
+desimal7 * 7;
+
+h10.innerText=
+bagi7.toFixed(5);
+
+h10a.innerText=
+desimal7.toFixed(5);
+
+h10b.innerText=
+hasilHari.toFixed(5);
+
+let hariArr=[
+"kamis",
+"jumat",
+"sabtu",
+"minggu",
+"senin",
+"selasa",
+"rabu"
+];
+
+let indexHari=
+Math.floor(
+hasilHari + 1e-7
+);
+
+h11.innerText=
+hariArr[indexHari];
+
+/* PASARAN */
+
+let bagi5 =
+hijri / 5;
+
+let desimal5 =
+bagi5 - Math.floor(bagi5);
+
+let hasilPasaran =
+desimal5 * 5;
+
+h12.innerText=
+bagi5.toFixed(5);
+
+h12a.innerText=
+desimal5.toFixed(5);
+
+h12b.innerText=
+hasilPasaran.toFixed(5);
+
+let pasaranArr=[
+"Kliwon",
+"Legi",
+"Pahing",
+"Pon",
+"Wage"
+];
+
+let indexPasaran=
+Math.floor(
+hasilPasaran + 1e-7
+);
+
+h13.innerText=
+pasaranArr[indexPasaran];
+
+/* HIJRI */
+
+let siklusH=
+Math.floor(
+hijri/10631
+);
+
+let sisaH=
+Math.round(
+(hijri/10631-siklusH)
+*10631
+);
+
+h14.innerText=
+(hijri/10631)
+.toFixed(5);
+
+h15.innerText=
+sisaH;
+
+let tahunH=
+siklusH*30;
+
+let tambah=
+Math.floor(
+sisaH/354
+);
+
+h16.innerText=
+tahunH;
+
+h17.innerText=
+tambah;
+
+/* KABISAT */
+
+let kabisatList=[
+2,5,7,10,13,
+15,18,21,24,
+26,29
+];
+
+let kabisat=0;
+
+for(let i=1;i<=tambah;i++){
+
+if(
+kabisatList.includes(i)
+){
+kabisat++;
+}
+
+}
+
+h18.innerText=
+kabisat;
+
+let sisaFinal=
+Math.round(
+(sisaH/354-tambah)
+*354-kabisat
+);
+
+h19.innerText=
+sisaFinal;
+
+let bulanH=
+Math.floor(
+sisaFinal/29.5
+);
+
+let tanggalH=
+Math.round(
+sisaFinal%29.5
+);
+
+tahunH+=tambah;
+
+if(tanggalH>0){
+tahunH+=1;
+}
+
+let bulanNama=[
+
+"Muharram",
+"Safar",
+"Rabiul Awal",
+"Rabiul Akhir",
+"Jumadil Awal",
+"Jumadil Akhir",
+"Rajab",
+"Sya'ban",
+"Ramadhan",
+"Syawal",
+"Dzulqa'dah",
+"Dzulhijjah"
+
+];
+
+let hasilAkhir=
+`
+${tanggalH}
+${bulanNama[bulanH]}
+${tahunH} H
+`;
+
+h20.innerText=
+hasilAkhir;
+
+hasil.innerHTML=
+`
+${hasilAkhir}
+<br>
+${h11.innerText}
+${h13.innerText}
+`;
+
+}
+
+</script>
+
+</body>
+</html>
+```
